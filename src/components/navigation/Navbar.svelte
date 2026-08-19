@@ -24,7 +24,7 @@
   const active = $derived(inverse ? 'bg-black text-white' : 'bg-mint-400 text-white');
 </script>
 
-<nav class="rounded-panel border px-4 py-2 shadow-sm {shell}" aria-label="Example navigation">
+<nav class="rounded-panel border px-4 py-2 shadow-sm {shell}" aria-label="Site navigation">
   <div class="flex items-center justify-between gap-4">
     <BrandLogo {inverse} compact />
     <div class="hidden items-center gap-1 sm:flex">

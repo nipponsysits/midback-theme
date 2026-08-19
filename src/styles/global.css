@@ -147,11 +147,6 @@
     box-shadow: 0 0 0 3px rgb(59 175 218 / 0.14);
     outline: none;
   }
-
-  .catalog-section {
-    content-visibility: auto;
-    contain-intrinsic-size: auto 36rem;
-  }
 }
 
 @layer utilities {

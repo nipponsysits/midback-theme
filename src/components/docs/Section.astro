@@ -8,10 +8,7 @@ type Props = {
 const { id, title, description } = Astro.props;
 ---
 
-<section
-  id={id}
-  class="catalog-section scroll-mt-24 border-b border-cloud-200 py-10 last:border-b-0 lg:py-12"
->
+<section id={id} class="scroll-mt-24 border-b border-cloud-200 py-10 last:border-b-0 lg:py-12">
   <header class="mb-5 max-w-2xl">
     <a
       href={`#${id}`}

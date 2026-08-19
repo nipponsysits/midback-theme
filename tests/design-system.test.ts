@@ -105,10 +105,14 @@ describe('form and overlay regressions', () => {
 
   test('keeps floating menus visible and positions popovers from their trigger', () => {
     const example = readSource('src/components/docs/Example.astro');
+    const section = readSource('src/components/docs/Section.astro');
+    const globalStyles = readSource('src/styles/global.css');
     const dropdown = readSource('src/components/core/Dropdown.svelte');
     const popover = readSource('src/components/core/Popover.svelte');
 
     expect(example).toContain("flush ? 'overflow-hidden' : 'overflow-visible'");
+    expect(section).not.toContain('catalog-section');
+    expect(globalStyles).not.toContain('content-visibility');
     expect(dropdown).toContain('open:z-30');
     expect(popover).toContain('trigger.getBoundingClientRect()');
     expect(popover).toContain("window.addEventListener('scroll', reposition, true)");
@@ -116,13 +120,22 @@ describe('form and overlay regressions', () => {
 });
 
 describe('rendering performance regressions', () => {
-  test('skips offscreen catalog work and pauses the hidden preloader', () => {
-    const globalStyles = readSource('src/styles/global.css');
+  test('pauses the hidden preloader', () => {
     const preloader = readSource('src/components/core/MaterialPreloader.svelte');
 
-    expect(globalStyles).toContain('content-visibility: auto');
-    expect(globalStyles).toContain('contain-intrinsic-size: auto 36rem');
     expect(preloader).toContain(".material-preloader[aria-hidden='true'] .color");
     expect(preloader).toContain('animation-play-state: paused');
+  });
+});
+
+describe('navigation roles', () => {
+  test('keeps site navigation distinct from the application workspace', () => {
+    const navbar = readSource('src/components/navigation/Navbar.svelte');
+    const navigator = readSource('src/components/navigation/Navigator.svelte');
+
+    expect(navbar).toContain('aria-label="Site navigation"');
+    expect(navigator).toContain('aria-label="Travox application workspace"');
+    expect(navigator).toContain('Workspace switcher');
+    expect(navigator).toContain('Quick navigation');
   });
 });
