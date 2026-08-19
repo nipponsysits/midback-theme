@@ -1,0 +1,214 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: Inter, 'Noto Sans Thai', 'Segoe UI', Tahoma, ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
+
+  --text-xs: 0.75rem;
+  --text-xs--line-height: 1.5;
+  --text-sm: 0.875rem;
+  --text-sm--line-height: 1.5;
+  --text-base: 1rem;
+  --text-base--line-height: 1.5;
+  --text-lg: 1.125rem;
+  --text-lg--line-height: 1.45;
+
+  --color-brand-50: #f3faeb;
+  --color-brand-100: #e4f4d2;
+  --color-brand-200: #caeaa9;
+  --color-brand-300: #a9db77;
+  --color-brand-400: #8dcc4e;
+  --color-brand-500: #78bb34;
+  --color-brand-600: #5c9825;
+  --color-brand-700: #487421;
+  --color-brand-800: #3c5d20;
+  --color-brand-900: #344f20;
+
+  --color-bluejeans-400: #5d9cec;
+  --color-bluejeans-500: #4a89dc;
+  --color-aqua-400: #4fc1e9;
+  --color-aqua-500: #3bafda;
+  --color-mint-400: #48cfad;
+  --color-mint-500: #37bc9b;
+  --color-grass-400: #a0d468;
+  --color-grass-500: #8cc152;
+  --color-sunflower-400: #ffce54;
+  --color-sunflower-500: #f6bb42;
+  --color-bittersweet-400: #fc6e51;
+  --color-bittersweet-500: #e9573f;
+  --color-grapefruit-400: #ed5565;
+  --color-grapefruit-500: #da4453;
+  --color-lavender-400: #ac92ec;
+  --color-lavender-500: #967adc;
+  --color-pinkrose-400: #ec87c0;
+  --color-pinkrose-500: #d770ad;
+
+  --color-cloud-50: #f9fafb;
+  --color-cloud-100: #f5f7fa;
+  --color-cloud-200: #e6e9ed;
+  --color-cloud-300: #ccd1d9;
+  --color-slate-400: #aab2bd;
+  --color-slate-500: #8e98a7;
+  --color-slate-600: #656d78;
+  --color-slate-700: #434a54;
+  --color-slate-800: #353b43;
+  --color-slate-900: #252a31;
+
+  --radius-control: 0.375rem;
+  --radius-panel: 0.625rem;
+  --shadow-panel: 0 1px 2px rgb(37 42 49 / 0.06), 0 8px 24px rgb(37 42 49 / 0.07);
+}
+
+:root {
+  color-scheme: light;
+  --surface: #ffffff;
+  --surface-muted: #f5f7fa;
+  --border: #e1e5ea;
+  --text: #434a54;
+  --text-muted: #656d78;
+  --focus: #3bafda;
+}
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5.5rem;
+  }
+
+  body {
+    margin: 0;
+    min-width: 20rem;
+    background: var(--surface-muted);
+    color: var(--text);
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    line-height: 1.6;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  button,
+  input,
+  select,
+  textarea {
+    font: inherit;
+  }
+
+  button,
+  summary,
+  [role='button'] {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  :focus-visible {
+    outline: 3px solid color-mix(in srgb, var(--focus) 35%, transparent);
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background: color-mix(in srgb, #78bb34 30%, white);
+  }
+}
+
+@layer components {
+  .surface-panel {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-panel);
+    background: var(--surface);
+    box-shadow: var(--shadow-panel);
+  }
+
+  .control-base {
+    min-height: 2.25rem;
+    height: 2.25rem;
+    width: 100%;
+    border: 1px solid #ccd1d9;
+    border-radius: var(--radius-control);
+    background: #fff;
+    padding: 0.5rem 0.75rem;
+    color: #434a54;
+    transition:
+      border-color 120ms ease,
+      box-shadow 120ms ease;
+  }
+
+  .control-base:hover {
+    border-color: #aab2bd;
+  }
+
+  .control-base:focus {
+    border-color: #3bafda;
+    box-shadow: 0 0 0 3px rgb(59 175 218 / 0.14);
+    outline: none;
+  }
+
+  .catalog-section {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 36rem;
+  }
+}
+
+@layer utilities {
+  .hide-scrollbar {
+    scrollbar-width: none;
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+dialog {
+  max-height: calc(100dvh - 2rem);
+}
+
+dialog::backdrop {
+  background: rgb(37 42 49 / 0.64);
+  backdrop-filter: blur(2px);
+}
+
+[popover] {
+  margin: 0;
+  opacity: 0;
+  transform: translateY(0.35rem) scale(0.98);
+  transition:
+    opacity 140ms ease,
+    transform 140ms ease,
+    display 140ms allow-discrete,
+    overlay 140ms allow-discrete;
+}
+
+[popover]:popover-open {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+@starting-style {
+  [popover]:popover-open {
+    opacity: 0;
+    transform: translateY(0.35rem) scale(0.98);
+  }
+}
+
+input[type='range'],
+input[type='checkbox'],
+input[type='radio'] {
+  accent-color: #78bb34;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}

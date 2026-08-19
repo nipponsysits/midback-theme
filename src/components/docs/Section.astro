@@ -1,0 +1,31 @@
+---
+type Props = {
+  id: string;
+  title: string;
+  description?: string;
+};
+
+const { id, title, description } = Astro.props;
+---
+
+<section
+  id={id}
+  class="catalog-section scroll-mt-24 border-b border-cloud-200 py-10 last:border-b-0 lg:py-12"
+>
+  <header class="mb-5 max-w-2xl">
+    <a
+      href={`#${id}`}
+      class="group inline-flex items-center gap-2 text-lg font-semibold text-slate-800 no-underline"
+    >
+      {title}
+      <span
+        class="text-sm font-normal text-slate-400 opacity-0 transition-opacity group-hover:opacity-100"
+        aria-hidden="true">#</span
+      >
+    </a>
+    {description && <p class="mt-2 text-slate-600">{description}</p>}
+  </header>
+  <div class="space-y-6">
+    <slot />
+  </div>
+</section>

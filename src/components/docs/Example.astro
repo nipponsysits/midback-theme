@@ -1,0 +1,32 @@
+---
+type Props = {
+  title?: string;
+  flush?: boolean;
+};
+
+const { title, flush = false } = Astro.props;
+---
+
+<div
+  class:list={[
+    'relative rounded-panel bg-white shadow-panel',
+    flush ? 'overflow-hidden' : 'overflow-visible',
+  ]}
+>
+  {
+    title && (
+      <div class="border-b border-cloud-300 bg-cloud-200 px-4 py-2.5 text-xs font-semibold uppercase tracking-[0.08em] text-slate-600">
+        {title}
+      </div>
+    )
+  }
+  {
+    flush ? (
+      <slot />
+    ) : (
+      <div class="p-5 sm:p-6">
+        <slot />
+      </div>
+    )
+  }
+</div>

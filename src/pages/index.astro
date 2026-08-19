@@ -1,0 +1,806 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { catalog, componentCount } from '../data/catalog';
+import Example from '../components/docs/Example.astro';
+import Section from '../components/docs/Section.astro';
+import Accordion from '../components/surfaces/Accordion.svelte';
+import Alert from '../components/core/Alert.svelte';
+import Badge from '../components/core/Badge.svelte';
+import BrandLogo from '../components/core/BrandLogo.svelte';
+import Breadcrumbs from '../components/navigation/Breadcrumbs.svelte';
+import Button from '../components/core/Button.svelte';
+import ButtonGroup from '../components/core/ButtonGroup.svelte';
+import Calendar from '../components/data/Calendar.svelte';
+import Chart from '../components/data/Chart.svelte';
+import Callout from '../components/core/Callout.svelte';
+import Carousel from '../components/surfaces/Carousel.svelte';
+import Choice from '../components/forms/Choice.svelte';
+import ColorSwatch from '../components/core/ColorSwatch.svelte';
+import DataTable from '../components/data/DataTable.svelte';
+import DatePicker from '../components/forms/DatePicker.svelte';
+import Dropdown from '../components/core/Dropdown.svelte';
+import ExceptionDialog from '../components/surfaces/ExceptionDialog.svelte';
+import Field from '../components/forms/Field.svelte';
+import FileUpload from '../components/forms/FileUpload.svelte';
+import Icon from '../components/core/Icon.svelte';
+import Jumbotron from '../components/surfaces/Jumbotron.svelte';
+import ListGroup from '../components/data/ListGroup.svelte';
+import MediaList from '../components/data/MediaList.svelte';
+import MaterialPreloader from '../components/core/MaterialPreloader.svelte';
+import Modal from '../components/surfaces/Modal.svelte';
+import Navbar from '../components/navigation/Navbar.svelte';
+import Navigator from '../components/navigation/Navigator.svelte';
+import Pagination from '../components/navigation/Pagination.svelte';
+import Panel from '../components/surfaces/Panel.svelte';
+import Popover from '../components/core/Popover.svelte';
+import PricingCard from '../components/surfaces/PricingCard.svelte';
+import Progress from '../components/core/Progress.svelte';
+import RichTextEditor from '../components/forms/RichTextEditor.svelte';
+import SelectsDemo from '../components/forms/SelectsDemo.svelte';
+import SiteFooter from '../components/surfaces/SiteFooter.svelte';
+import SortableList from '../components/data/SortableList.svelte';
+import Spinner from '../components/core/Spinner.svelte';
+import StatCard from '../components/data/StatCard.svelte';
+import Stepper from '../components/forms/Stepper.svelte';
+import Tabs from '../components/navigation/Tabs.svelte';
+import ThumbnailCard from '../components/surfaces/ThumbnailCard.svelte';
+import Timeline from '../components/data/Timeline.svelte';
+import TogglesDemo from '../components/forms/TogglesDemo.svelte';
+import Tooltip from '../components/core/Tooltip.svelte';
+
+const colors = [
+  ['BLUE JEANS', '#5D9CEC', '#4A89DC'],
+  ['AQUA', '#4FC1E9', '#3BAFDA'],
+  ['MINT', '#48CFAD', '#37BC9B'],
+  ['GRASS', '#A0D468', '#8CC152'],
+  ['SUNFLOWER', '#FFCE54', '#F6BB42'],
+  ['BITTERSWEET', '#FC6E51', '#E9573F'],
+  ['GRAPEFRUIT', '#ED5565', '#DA4453'],
+  ['LAVENDER', '#AC92EC', '#967ADC'],
+  ['PINK ROSE', '#EC87C0', '#D770AD'],
+  ['LIGHT GRAY', '#F5F7FA', '#E6E9ED'],
+  ['MEDIUM GRAY', '#CCD1D9', '#AAB2BD'],
+  ['DARK GRAY', '#656D78', '#434A54'],
+] as const;
+
+const iconNames = [
+  ['home', 'Home'],
+  ['user', 'User'],
+  ['message', 'Message'],
+  ['settings', 'Settings'],
+  ['calendar', 'Calendar'],
+  ['search', 'Search'],
+  ['bell', 'Bell'],
+  ['upload', 'Upload'],
+  ['file', 'File'],
+  ['card', 'Payment'],
+  ['check-circle', 'Success'],
+  ['warning', 'Warning'],
+] as const;
+---
+
+<BaseLayout title="Travox MidBack Design System">
+  <div id="top" class="min-h-screen">
+    <header class="sticky top-0 z-40 border-b border-cloud-200 bg-white/95 backdrop-blur">
+      <div class="mx-auto flex h-14 max-w-[76rem] items-center gap-4 px-4 sm:px-6">
+        <BrandLogo />
+        <span class="hidden h-6 w-px bg-cloud-200 sm:block"></span>
+        <span class="hidden text-sm font-medium text-slate-500 sm:block">Design system</span>
+        <div class="ml-auto flex items-center gap-2">
+          <a
+            href="#colors"
+            class="hidden rounded-control px-3 py-2 text-sm font-semibold text-slate-600 hover:bg-cloud-100 sm:block"
+            >Components</a
+          >
+          <a
+            href="https://github.com/nipponsysits/MidBack-Theme"
+            class="inline-flex min-h-9 items-center gap-2 rounded-control border border-cloud-300 bg-white px-3 text-sm font-semibold text-slate-700 shadow-sm hover:border-slate-400"
+            ><Icon name="code" size={16} /> GitHub</a
+          >
+        </div>
+      </div>
+    </header>
+
+    <div class="mx-auto grid max-w-[76rem] lg:grid-cols-[14rem_minmax(0,1fr)]">
+      <aside class="hidden border-r border-cloud-200 bg-white lg:block">
+        <nav
+          class="sticky top-14 max-h-[calc(100dvh-3.5rem)] overflow-y-auto px-4 py-6"
+          aria-label="Component catalog"
+        >
+          {
+            catalog.map((group) => (
+              <div class="mb-5">
+                <p class="mb-2 px-2 text-xs font-bold uppercase tracking-[0.12em] text-slate-400">
+                  {group.label}
+                </p>
+                <ul class="space-y-0.5">
+                  {group.items.map((item) => (
+                    <li>
+                      <a
+                        href={`#${item.id}`}
+                        class="block rounded-control px-2.5 py-1.5 text-sm text-slate-600 transition hover:bg-cloud-200 hover:text-slate-800"
+                      >
+                        {item.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))
+          }
+        </nav>
+      </aside>
+
+      <main class="min-w-0 bg-white">
+        <div class="border-b border-cloud-300 bg-white px-5 py-12 sm:px-8 lg:py-14">
+          <div class="mx-auto max-w-[60rem]">
+            <div
+              class="inline-flex items-center gap-2 rounded-full border border-brand-300 bg-brand-50 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.08em] text-brand-700"
+            >
+              <span class="size-2 rounded-full bg-brand-500"></span>Version 2.0
+            </div>
+            <h1
+              class="mt-4 max-w-4xl text-2xl font-semibold text-slate-900 sm:text-3xl lg:text-4xl"
+            >
+              The MidBack interface, modernized without losing its character.
+            </h1>
+            <p class="mt-3 max-w-2xl text-sm text-slate-600">
+              A complete, accessible component catalog rebuilt from the original Bootflat theme with
+              Astro, Svelte, Tailwind CSS 4, Lucide icons, and native browser primitives.
+            </p>
+            <dl class="mt-8 grid max-w-2xl grid-cols-2 gap-4 sm:grid-cols-4">
+              <div>
+                <dt class="text-xs uppercase tracking-wide text-slate-400">Catalog</dt><dd
+                  class="mt-0.5 text-lg font-semibold text-slate-800"
+                >
+                  {componentCount}
+                </dd>
+              </div>
+              <div>
+                <dt class="text-xs uppercase tracking-wide text-slate-400">Runtime libs</dt><dd
+                  class="mt-0.5 text-lg font-semibold text-slate-800"
+                >
+                  4
+                </dd>
+              </div>
+              <div>
+                <dt class="text-xs uppercase tracking-wide text-slate-400">Output</dt><dd
+                  class="mt-0.5 text-lg font-semibold text-slate-800"
+                >
+                  Static
+                </dd>
+              </div>
+              <div>
+                <dt class="text-xs uppercase tracking-wide text-slate-400">Icons</dt><dd
+                  class="mt-0.5 text-lg font-semibold text-slate-800"
+                >
+                  Lucide
+                </dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+
+        <div class="mx-auto max-w-[60rem] px-5 sm:px-8">
+          <Section
+            id="colors"
+            title="Color"
+            description="The complete Bootflat palette from the original project, with Travox green retained as the primary brand action."
+          >
+            <div class="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+              {colors.map(([name, light, dark]) => <ColorSwatch {name} {light} {dark} />)}
+            </div>
+          </Section>
+
+          <Section
+            id="typography"
+            title="Typography"
+            description="A native system stack replaces font files and webfont icon glyphs, improving rendering speed and language coverage."
+          >
+            <Example title="Type scale">
+              <div class="space-y-5">
+                <div>
+                  <p class="text-xs text-slate-400">Display · 48/52</p><p
+                    class="mt-1 text-5xl font-semibold tracking-tight text-slate-900"
+                  >
+                    Travel operations
+                  </p>
+                </div>
+                <div>
+                  <p class="text-xs text-slate-400">Heading 1 · 36/40</p><h1
+                    class="mt-1 text-4xl font-semibold tracking-tight text-slate-800"
+                  >
+                    Today’s reservations
+                  </h1>
+                </div>
+                <div>
+                  <p class="text-xs text-slate-400">Heading 2 · 24/32</p><h2
+                    class="mt-1 text-2xl font-semibold text-slate-800"
+                  >
+                    Customer information
+                  </h2>
+                </div>
+                <div>
+                  <p class="text-xs text-slate-400">Body · 14/22</p><p
+                    class="mt-1 max-w-2xl text-slate-600"
+                  >
+                    Comfortable typography keeps operational content easy to scan while giving
+                    controls and longer messages enough room to breathe.
+                  </p>
+                </div>
+                <blockquote
+                  class="border-l-4 border-brand-500 bg-brand-50 px-4 py-3 text-slate-600"
+                >
+                  Good operational design makes the next action obvious.
+                </blockquote>
+              </div>
+            </Example>
+          </Section>
+
+          <Section
+            id="icons"
+            title="Icons"
+            description="Lucide’s ISC-licensed SVG components replace Font Awesome and Bootstrap Glyphicons. Only icons used by the build are shipped."
+          >
+            <Example
+              ><div class="grid grid-cols-3 gap-3 sm:grid-cols-4 lg:grid-cols-6">
+                {
+                  iconNames.map(([name, label]) => (
+                    <div class="flex flex-col items-center gap-2 rounded-panel border border-cloud-200 p-4 text-center">
+                      <>
+                        <Icon name={name} size={22} class="text-slate-700" />
+                        <span class="text-xs text-slate-500">{label}</span>
+                      </>
+                    </div>
+                  ))
+                }
+              </div></Example
+            >
+          </Section>
+
+          <Section
+            id="buttons"
+            title="Buttons"
+            description="All original semantic variants remain, with larger targets and consistent focus treatment."
+          >
+            <Example title="Variants"
+              ><div class="flex flex-wrap gap-3">
+                <Button label="Default" /><Button label="Primary" variant="primary" /><Button
+                  label="Success"
+                  variant="success"
+                /><Button label="Info" variant="info" /><Button
+                  label="Warning"
+                  variant="warning"
+                /><Button label="Danger" variant="danger" /><Button label="Link" variant="link" />
+              </div></Example
+            >
+            <Example title="Sizes and icons"
+              ><div class="flex flex-wrap items-center gap-3">
+                <Button label="Extra small" size="xs" /><Button label="Small" size="sm" /><Button
+                  label="Default"
+                /><Button label="Large" size="lg" variant="primary" /><Button
+                  label="Download"
+                  icon="download"
+                  variant="primary"
+                /><Button label="Delete" icon="trash" iconOnly variant="danger" />
+              </div></Example
+            >
+          </Section>
+
+          <Section
+            id="button-groups"
+            title="Button groups"
+            description="Grouped actions retain the connected Bootstrap-era silhouette."
+          >
+            <Example
+              ><div class="flex flex-wrap items-start gap-4">
+                <ButtonGroup /><ButtonGroup orientation="vertical" />
+              </div></Example
+            >
+          </Section>
+
+          <Section
+            id="dropdowns"
+            title="Dropdowns"
+            description="Native details/summary provides keyboard behavior without jQuery or a dropdown runtime."
+          >
+            <Example
+              ><div class="flex flex-wrap gap-3">
+                <Dropdown /><Dropdown label="Primary actions" variant="primary" />
+              </div></Example
+            >
+          </Section>
+
+          <Section
+            id="forms"
+            title="Form fields"
+            description="Native controls replace form plugins and are styled with a shared, accessible control primitive."
+          >
+            <Example>
+              <form class="grid gap-5 sm:grid-cols-2" onsubmit="return false">
+                <Field id="customer-name" label="Customer name" value="Araya Ch." required />
+                <Field
+                  id="customer-email"
+                  label="Email address"
+                  type="email"
+                  value="araya@example.com"
+                  icon="mail"
+                />
+                <DatePicker
+                  id="departure"
+                  label="Departure"
+                  value="2026-08-21"
+                  hint="Times follow the airport’s local timezone."
+                  client:visible
+                />
+                <Field
+                  id="booking-code"
+                  label="Booking code"
+                  value="TV"
+                  error="Use at least six characters."
+                />
+                <div class="sm:col-span-2">
+                  <label
+                    for="booking-notes"
+                    class="mb-1.5 block text-sm font-semibold text-slate-700">Notes</label
+                  ><textarea
+                    id="booking-notes"
+                    class="control-base min-h-24 resize-y"
+                    placeholder="Add internal notes…"></textarea>
+                </div>
+              </form>
+            </Example>
+          </Section>
+
+          <Section
+            id="selects"
+            title="Selects & tags"
+            description="Theme-aligned Svelte dropdowns replace the legacy select plugin; the tag field covers its multi-value use case."
+          >
+            <Example><SelectsDemo client:visible /></Example>
+          </Section>
+
+          <Section
+            id="checks"
+            title="Checkboxes & radios"
+            description="Browser-native inputs replace iCheck and inherit the Travox brand color."
+          >
+            <Example
+              ><div class="grid gap-6 sm:grid-cols-2">
+                <fieldset>
+                  <legend class="mb-2 text-sm font-semibold text-slate-700">Services</legend><div
+                    class="flex flex-col items-start gap-2"
+                  >
+                    <Choice id="service-flight" label="Flight" checked /><Choice
+                      id="service-hotel"
+                      label="Hotel"
+                    /><Choice id="service-transfer" label="Transfer" />
+                  </div>
+                </fieldset><fieldset>
+                  <legend class="mb-2 text-sm font-semibold text-slate-700">Payment</legend><div
+                    class="flex flex-col items-start gap-2"
+                  >
+                    <Choice
+                      id="pay-card"
+                      type="radio"
+                      name="payment"
+                      label="Credit card"
+                      checked
+                    /><Choice
+                      id="pay-transfer"
+                      type="radio"
+                      name="payment"
+                      label="Bank transfer"
+                    /><Choice
+                      id="pay-disabled"
+                      type="radio"
+                      name="payment"
+                      label="Invoice (unavailable)"
+                      disabled
+                    />
+                  </div>
+                </fieldset>
+              </div></Example
+            >
+          </Section>
+
+          <Section
+            id="toggles"
+            title="Toggles"
+            description="An accessible checkbox underneath a compact visual switch."
+          >
+            <Example><TogglesDemo client:visible /></Example>
+          </Section>
+
+          <Section
+            id="steppers"
+            title="Steppers"
+            description="A native number input with optional Svelte increment and decrement controls."
+          >
+            <Example><Stepper client:visible /></Example>
+          </Section>
+
+          <Section
+            id="editor"
+            title="Editor"
+            description="A small contenteditable control replaces Summernote and its icon font. Formatting uses the native Selection and Range APIs."
+          >
+            <Example><RichTextEditor client:visible /></Example>
+          </Section>
+
+          <Section
+            id="upload"
+            title="File upload"
+            description="Native file input and drag/drop replace vue-upload-component."
+          >
+            <Example><FileUpload client:visible /></Example>
+          </Section>
+
+          <Section
+            id="alerts"
+            title="Alerts"
+            description="Four familiar states with icon, title, message, and optional dismissal."
+          >
+            <div class="space-y-3">
+              <Alert
+                title="Reservation confirmed"
+                message="Tickets can now be issued."
+                variant="success"
+              /><Alert
+                title="Schedule updated"
+                message="Departure moved forward by 20 minutes."
+              /><Alert
+                title="Payment pending"
+                message="Authorization expires in 24 hours."
+                variant="warning"
+              /><Alert
+                title="Request failed"
+                message="Check the customer details and try again."
+                variant="danger"
+                dismissible
+                client:visible
+              />
+            </div>
+          </Section>
+
+          <Section
+            id="badges"
+            title="Labels & badges"
+            description="Semantic labels and compact count pills share one lightweight component."
+          >
+            <Example
+              ><div class="flex flex-wrap items-center gap-3">
+                <Badge label="Default" /><Badge label="Primary" variant="primary" /><Badge
+                  label="Success"
+                  variant="success"
+                /><Badge label="Info" variant="info" /><Badge
+                  label="Warning"
+                  variant="warning"
+                /><Badge label="Danger" variant="danger" /><Badge
+                  label="42"
+                  variant="danger"
+                  pill
+                />
+              </div></Example
+            >
+          </Section>
+
+          <Section
+            id="progress"
+            title="Progress"
+            description="Native ARIA progress semantics with original palette states and an optional stripe treatment."
+          >
+            <Example
+              ><div class="space-y-5">
+                <Progress value={62} label="Booking completion" /><Progress
+                  value={40}
+                  label="Documents"
+                  variant="success"
+                /><Progress value={74} label="Payment" variant="warning" striped /><div
+                  class="flex items-center gap-2 border-t border-cloud-200 pt-4"
+                >
+                  <Spinner /><span class="text-sm text-slate-500">Syncing reservations…</span>
+                </div>
+              </div></Example
+            >
+          </Section>
+
+          <Section
+            id="preloader"
+            title="Material preloader"
+            description="The original four-color request indicator, rebuilt without jQuery and anchored to the top edge of its preview surface."
+          >
+            <Example title="Interactive preview" flush>
+              <MaterialPreloader client:visible />
+            </Example>
+          </Section>
+
+          <Section
+            id="tooltips"
+            title="Tooltips"
+            description="CSS-only hover and focus tooltips preserve all four placements without a positioning library."
+          >
+            <Example
+              ><div class="flex flex-wrap justify-center gap-6 py-5">
+                <Tooltip label="Shown above" position="top" text="Top" /><Tooltip
+                  label="Shown on the right"
+                  position="right"
+                  text="Right"
+                /><Tooltip label="Shown below" position="bottom" text="Bottom" /><Tooltip
+                  label="Shown on the left"
+                  position="left"
+                  text="Left"
+                />
+              </div></Example
+            >
+          </Section>
+
+          <Section
+            id="popovers"
+            title="Popovers"
+            description="The browser Popover API replaces Bootstrap’s JavaScript popover plugin."
+          >
+            <Example><Popover client:visible /></Example>
+          </Section>
+
+          <Section
+            id="exception"
+            title="Exception dialog"
+            description="The project-specific red exception panel is retained, now on the native dialog element."
+          >
+            <Example><ExceptionDialog client:idle /></Example>
+          </Section>
+
+          <Section
+            id="navbar"
+            title="Navbar"
+            description="Light, dark, and responsive states with native disclosure on small screens."
+          >
+            <div class="space-y-3"><Navbar /><Navbar inverse /></div>
+          </Section>
+
+          <Section
+            id="navigator"
+            title="App navigator"
+            description="A faithful modern version of the original Travox top, middle, and bottom navigation bands."
+          >
+            <Navigator />
+          </Section>
+
+          <Section
+            id="tabs"
+            title="Tabs & pills"
+            description="Keyboard-aware Svelte tabs support both the original line and pill treatments."
+          >
+            <div class="grid gap-4 lg:grid-cols-2">
+              <Example title="Tabs"><Tabs client:visible /></Example><Example title="Pills"
+                ><Tabs variant="pills" client:visible /></Example
+              >
+            </div>
+          </Section>
+
+          <Section
+            id="breadcrumbs"
+            title="Breadcrumbs"
+            description="Standard and arrow-separated page hierarchy."
+          >
+            <Example><div class="space-y-3"><Breadcrumbs /><Breadcrumbs arrow /></div></Example>
+          </Section>
+
+          <Section
+            id="pagination"
+            title="Pagination & pager"
+            description="Page-level navigation keeps the compact density of the original UI kit."
+          >
+            <Example><div class="space-y-4"><Pagination /><Pagination compact /></div></Example>
+          </Section>
+
+          <Section
+            id="tables"
+            title="Tables"
+            description="Responsive horizontal overflow replaces layout-breaking fixed grids; states remain legible at operational density."
+          >
+            <Example flush><DataTable /></Example>
+          </Section>
+
+          <Section
+            id="lists"
+            title="Lists"
+            description="Simple navigation and media-rich activity variants replace Bootstrap list groups."
+          >
+            <div class="grid gap-4 lg:grid-cols-2"><ListGroup /><ListGroup rich /></div>
+          </Section>
+
+          <Section
+            id="sorting"
+            title="Drag & drop"
+            description="Native drag events replace Sortable and the Vue drag wrappers; explicit move controls keep the workflow usable by keyboard and touch users."
+          >
+            <Example><SortableList client:visible /></Example>
+          </Section>
+
+          <Section
+            id="stats"
+            title="Stats"
+            description="The original graph data pattern becomes reusable summary cards with semantic trend colors."
+          >
+            <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              <StatCard
+                label="Reservations"
+                value="1,284"
+                change="12.4%"
+                icon="calendar"
+              /><StatCard label="Revenue" value="฿842k" change="8.1%" icon="card" /><StatCard
+                label="Cancellations"
+                value="3.2%"
+                change="0.6%"
+                direction="down"
+                icon="warning"
+              />
+            </div>
+          </Section>
+
+          <Section
+            id="charts"
+            title="Charts"
+            description="Small native SVG charts replace Chart.js, its horizontal-bar extension, and Highcharts for the theme’s presentation layer."
+          >
+            <div class="grid gap-4 lg:grid-cols-2">
+              <Chart /><Chart type="line" label="Weekly revenue trend" />
+            </div>
+          </Section>
+
+          <Section
+            id="timeline"
+            title="Timeline"
+            description="A compact operational event history based on the original Bootflat timeline."
+          >
+            <Example><Timeline /></Example>
+          </Section>
+
+          <Section
+            id="calendar"
+            title="Calendar"
+            description="A lightweight visual calendar with native buttons and no date library."
+          >
+            <Example><Calendar /></Example>
+          </Section>
+
+          <Section
+            id="media"
+            title="Media list"
+            description="Avatar, metadata, and message hierarchy for customer and team conversations."
+          >
+            <Example><MediaList /></Example>
+          </Section>
+
+          <Section
+            id="panels"
+            title="Panels & wells"
+            description="All original panel states plus a quiet inset well surface."
+          >
+            <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              <Panel title="Default panel" message="Neutral supporting content." /><Panel
+                title="Primary panel"
+                message="A brand-led container."
+                variant="primary"
+              /><Panel
+                title="Success panel"
+                message="The operation completed."
+                variant="success"
+              /><Panel title="Info panel" message="Additional context." variant="info" /><Panel
+                title="Warning panel"
+                message="Review before continuing."
+                variant="warning"
+              /><Panel title="Danger panel" message="Action is required." variant="danger" />
+            </div>
+            <Panel
+              title="Inset well"
+              message="Use wells for quiet grouped information inside a larger page surface."
+              well
+            />
+          </Section>
+
+          <Section
+            id="thumbnails"
+            title="Thumbnails"
+            description="Responsive visual cards replace the fixed 200 × 200 placeholder from the legacy page."
+          >
+            <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              <ThumbnailCard
+                title="Operations"
+                message="Today’s workflow"
+                icon="dashboard"
+              /><ThumbnailCard
+                title="Customers"
+                message="Profile directory"
+                color="purple"
+                icon="users"
+              /><ThumbnailCard
+                title="Revenue"
+                message="Monthly overview"
+                color="green"
+                icon="card"
+              /><ThumbnailCard
+                title="Destinations"
+                message="Route planning"
+                color="orange"
+                icon="calendar"
+              />
+            </div>
+          </Section>
+
+          <Section
+            id="pricing"
+            title="Pricing"
+            description="The original three-card pricing composition, with clearer feature rhythm."
+          >
+            <div class="grid gap-4 lg:grid-cols-3">
+              <PricingCard
+                name="Starter"
+                price={299}
+                features={['3 team members', 'Core reservations', 'Email support']}
+              /><PricingCard
+                name="Business"
+                price={499}
+                featured
+                features={['10 team members', 'Operations reports', 'Priority support']}
+              /><PricingCard
+                name="Enterprise"
+                price={599}
+                features={['Unlimited members', 'Advanced controls', 'Dedicated support']}
+              />
+            </div>
+          </Section>
+
+          <Section
+            id="jumbotron"
+            title="Jumbotron"
+            description="A focused promotional surface preserving the strong contrast of the old theme."
+          >
+            <Jumbotron />
+          </Section>
+
+          <Section
+            id="carousel"
+            title="Carousel"
+            description="Native horizontal scrolling and scroll-snap replace Bootstrap carousel JavaScript."
+          >
+            <Carousel />
+          </Section>
+
+          <Section
+            id="accordion"
+            title="Accordion"
+            description="Native details elements replace the Bootstrap collapse plugin."
+          >
+            <Accordion />
+          </Section>
+
+          <Section
+            id="modal"
+            title="Modal"
+            description="The native dialog element provides focus management, Escape handling, and backdrop behavior."
+          >
+            <Example><Modal client:idle /></Example>
+          </Section>
+
+          <Section
+            id="footer"
+            title="Footer"
+            description="A complete application footer using the modernized Travox wordmark."
+          >
+            <SiteFooter />
+          </Section>
+
+          <section class="py-12">
+            <Callout
+              title="Migration complete by design"
+              message="Every component family in the legacy showcase is represented here, including the project-specific navigator, data table, editor, multi-select, upload, stats, and exception state."
+            />
+          </section>
+        </div>
+      </main>
+    </div>
+  </div>
+</BaseLayout>

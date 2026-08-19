@@ -1,39 +1,94 @@
-# Travox MidBack-Theme
+# Travox MidBack Design System
 
+[![Check and deploy GitHub Pages](https://github.com/nipponsysits/midback-theme/actions/workflows/pages.yml/badge.svg)](https://github.com/nipponsysits/midback-theme/actions/workflows/pages.yml)
 
+ระบบออกแบบของ Travox MidBack ที่ย้ายจาก Bower, Grunt, Bootstrap 3, Bootflat, jQuery และ Vue 2 มาเป็น static site สมัยใหม่ โดยคงโทนสี รูปทรง และความหนาแน่นของหน้าจอเดิมไว้ พร้อมปรับ spacing, accessibility และ responsive layout ให้สม่ำเสมอขึ้น
 
-### Support
+**Website:** [nipponsysits.github.io/midback-theme](https://nipponsysits.github.io/midback-theme/)
 
-- [jquery](https://github.com/jquery/jquery.git) `https://github.com/jquery/jquery.git`
-- [vue](https://github.com/vuejs/vue.git) `https://github.com/vuejs/vue.git`
-- [moment](https://github.com/moment/moment.git) `https://github.com/moment/moment.git`
-- [bootstrap](https://github.com/twbs/bootstrap.git) `https://github.com/twbs/bootstrap.git`
-- [socket.io-client](https://github.com/socketio/socket.io-client.git) `https://github.com/socketio/socket.io-client.git`
-- [font-awesome](https://github.com/FortAwesome/Font-Awesome.git) `https://github.com/FortAwesome/Font-Awesome.git`
-- [material-preloader](ttps://github.com/aarondo/Material-Preloader.git) `https://github.com/aarondo/Material-Preloader.git`
-- [JavaScript-MD5](https://github.com/blueimp/JavaScript-MD5.git) `https://github.com/blueimp/JavaScript-MD5.git`
-- [axios](https://github.com/mzabriskie/axios.git) `https://github.com/mzabriskie/axios.git`
-- [lodash](https://github.com/lodash/lodash.git) `https://github.com/lodash/lodash.git`
-- [capslockstate-jquery-plugin](https://github.com/nosilleg/capslockstate-jquery-plugin.git) `https://github.com/nosilleg/capslockstate-jquery-plugin.git`
-- [vue-html-editor](https://github.com/Haixing-Hu/vue-html-editor.git) `https://github.com/Haixing-Hu/vue-html-editor.git`
-- [push.js](https://github.com/Nickersoft/push.js.git) `https://github.com/Nickersoft/push.js.git`
-- [chai](https://github.com/chaijs/chai.git) `https://github.com/chaijs/chai.git`
-- [chai-http](https://github.com/chaijs/chai-http.git) `https://github.com/chaijs/chai-http.git`
-- [chartjs](https://github.com/chartjs/Chart.js.git) `https://github.com/chartjs/Chart.js.git`
-- [localforage](https://github.com/localForage/localForage.git) `https://github.com/localForage/localForage.git`
-- [html5shiv](https://github.com/aFarkas/html5shiv.git) `https://github.com/aFarkas/html5shiv.git`
-- [respond](https://github.com/scottjehl/Respond.git) `https://github.com/scottjehl/Respond.git`
-- [vue-upload-component](https://github.com/lian-yue/vue-upload-component.git) `https://github.com/lian-yue/vue-upload-component.git`
-- [vue-dnd](https://github.com/lain-dono/vue-dnd.git) `https://github.com/lain-dono/vue-dnd.git`
-- [vue-sort](https://github.com/sagalbot/vue-sortable.git) `https://github.com/sagalbot/vue-sortable.git`
-- [sortable](https://github.com/RubaXa/Sortable.git)`https://github.com/RubaXa/Sortable.git`
-- [domurl](https://github.com/Mikhus/domurl.git)`https://github.com/Mikhus/domurl.git`
-- [console-normalizer](https://github.com/Zenovations/console-normalizer.git)`https://github.com/Zenovations/console-normalizer.git`
-- [vue-select](https://github.com/sagalbot/vue-select.git)`https://github.com/sagalbot/vue-select.git`
-- [chart.js](https://github.com/chartjs/Chart.js.git)`https://github.com/chartjs/Chart.js.git`
-- [flatpickr](https://github.com/chmln/flatpickr.git)`https://github.com/chmln/flatpickr.git`
-- [fuse.js](https://github.com/krisk/Fuse.git)`https://github.com/krisk/Fuse.git`
-    
-### Authors
+## Tech stack
 
-**Kananek T. <info.dvgamer@gmail.com>**
+- Astro 7 — static-first shell และ GitHub Pages output
+- Svelte 5 — hydrate เฉพาะ component ที่มี state จริง
+- Tailwind CSS 4 — CSS-first design tokens ผ่าน first-party Vite plugin
+- Lucide Svelte — SVG icon แบบ tree-shake แทน Font Awesome/Glyphicons
+- Bun — package manager, test runner และ local workflow
+
+ไม่มี Bootstrap, jQuery, Vue 2, Moment, Axios, Lodash, Font Awesome, icon font หรือ browser polyfill เก่าค้างอยู่ใน production bundle
+
+## Commands
+
+```bash
+bun install
+bun run dev
+bun run check
+bun run test
+bun run build
+bun run preview
+```
+
+`bun run validate` รัน type/Svelte/Astro checks, tests และ production buildต่อกันเหมือน quality gate ใน CI
+
+## Structure
+
+```text
+src/
+├── components/
+│   ├── core/        # buttons, badges, alerts, icons, progress, overlays
+│   ├── data/        # table, list, stats, charts, calendar, timeline
+│   ├── docs/        # design-system documentation surfaces
+│   ├── forms/       # native inputs plus focused Svelte enhancements
+│   ├── navigation/  # navbar, Travox navigator, tabs, pagination
+│   └── surfaces/    # panels, pricing, carousel, modal, footer
+├── data/catalog.ts  # authoritative component catalog
+├── layouts/
+├── pages/index.astro
+└── styles/global.css
+```
+
+Design tokens อยู่ใน `src/styles/global.css` ด้วย Tailwind CSS 4 `@theme` ส่วน component ใช้ utility classes โดยตรง เพื่อให้ compiler ตัด CSS ที่ไม่ใช้ออกได้
+
+## Component coverage
+
+หน้า design system ครอบคลุม component ใน legacy showcase ทั้งหมด:
+
+- Foundations: color, typography, icons
+- Actions: buttons, button groups, dropdowns
+- Forms: inputs, textarea, native select, tag input, checkbox, radio, toggle, stepper, editor, file upload
+- Feedback: alerts, labels, badges, progress, spinner, tooltips, popovers, exception dialog
+- Navigation: navbar, Travox app navigator, tabs, pills, breadcrumbs, pagination, pager
+- Data display: tables, lists, drag/drop sorting, stats, SVG charts, timeline, calendar, media list
+- Surfaces: panels, wells, thumbnails, pricing, jumbotron, carousel, accordion, modal, footer
+
+รายละเอียดการแทน dependency เดิมอยู่ใน [Migration notes](docs/MIGRATION.md)
+
+## Native-first behavior
+
+- Dropdown/accordion: `<details>` และ `<summary>`
+- Modal/exception: `<dialog>`
+- Popover: HTML Popover API
+- Carousel: CSS scroll snap
+- Time, number, checkbox, radio และ upload: native form controls
+- Datepicker และ select: lightweight Svelte components ที่ใช้ native Date/keyboard APIs
+- Editor: `contenteditable` + Selection/Range APIs
+- Charts: responsive SVG
+
+component ที่เป็น static จะไม่มี client JavaScript ส่วน component ที่มี state ใช้ Astro hydration directive แบบ `client:visible` หรือ `client:idle`
+
+## GitHub Pages
+
+Workflow `.github/workflows/pages.yml` จะรันเมื่อ push เข้า `master`/`main`, เมื่อเปิด pull request และเมื่อกด manual dispatch:
+
+1. install จาก `bun.lock` แบบ frozen
+2. type/component checks
+3. tests
+4. production build
+5. upload และ deploy `dist/` เมื่อไม่ใช่ pull request
+
+Repository นี้ deploy ที่ `https://nipponsysits.github.io/midback-theme/` โดย `astro.config.mjs` ใส่ base path เฉพาะตอนรันใน GitHub Actions ทำให้ local development ยังเปิดจาก `/` ได้ตามปกติ
+
+ตั้งค่า GitHub repository ที่ **Settings → Pages → Source → GitHub Actions** หนึ่งครั้ง แล้ว workflow จะ deploy ให้อัตโนมัติ
+
+## Browser support
+
+Tailwind CSS 4 และ native primitives ชุดนี้ตั้งเป้า modern evergreen browsers: Chrome 111+, Safari 16.4+ และ Firefox 128+. ไม่มี IE polyfills หรือ legacy icon fonts
