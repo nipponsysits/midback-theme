@@ -81,8 +81,8 @@ describe('migration constraints', () => {
     expect(workflow).toContain('bun run test');
     expect(workflow).toContain('bun run build');
     expect(workflow).toContain('bun run verify:dist');
-    expect(workflow).toContain('actions/configure-pages@v5');
-    expect(workflow).toContain('actions/upload-pages-artifact@v4');
+    expect(workflow).toContain('actions/configure-pages@v6');
+    expect(workflow).toContain('actions/upload-pages-artifact@v5');
     expect(workflow).toContain('actions/deploy-pages@v5');
   });
 });
